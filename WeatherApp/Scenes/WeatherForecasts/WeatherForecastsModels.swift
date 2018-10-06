@@ -23,6 +23,7 @@ enum WeatherForecasts
     }
     struct Response
     {
+      var interimStatements: [Date: [DailyInterimStatement]]
     }
     struct ViewModel
     {

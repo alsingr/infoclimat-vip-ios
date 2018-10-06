@@ -25,16 +25,16 @@ protocol WeatherForecastsDataStore
 class WeatherForecastsInteractor: WeatherForecastsBusinessLogic, WeatherForecastsDataStore
 {
   var presenter: WeatherForecastsPresentationLogic?
-  var worker: WeatherForecastsWorker?
   
+  var worker = WeatherWorker(weatherDataStore: WeatherApi())
+
   // MARK: FetchWeatherData
   
   func fetchWeatherForecasts(request: WeatherForecasts.FetchWeatherData.Request)
   {
-    worker = WeatherForecastsWorker()
-    worker?.doSomeWork()
-    
-    let response = WeatherForecasts.FetchWeatherData.Response()
-    presenter?.presentWeatherForecasts(response: response)
+    worker.fetchWeatherForecasts { interimStatementsWithin7Days in
+      let response = WeatherForecasts.FetchWeatherData.Response(interimStatements: interimStatementsWithin7Days)
+      self.presenter?.presentWeatherForecasts(response: response)
+    }
   }
 }
