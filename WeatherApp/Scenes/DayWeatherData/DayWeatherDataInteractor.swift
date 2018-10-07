@@ -19,23 +19,23 @@ protocol DayWeatherDataBusinessLogic
 
 protocol DayWeatherDataDataStore
 {
-  var interimStatements: Any? { get set }
+  var interimStatements: [DailyInterimStatement]? { get set }
 }
 
 class DayWeatherDataInteractor: DayWeatherDataBusinessLogic, DayWeatherDataDataStore
 {
   var presenter: DayWeatherDataPresentationLogic?
   var worker: DayWeatherDataWorker?
-  var interimStatements: Any? = nil
+  var interimStatements: [DailyInterimStatement]? = nil
   
   // MARK: FetchDaysWeatherData
   
   func fetchDaysWeatherData(request: DayWeatherData.FetchDaysWeatherData.Request)
   {
-    worker = DayWeatherDataWorker()
-    worker?.doSomeWork()
-    
-    let response = DayWeatherData.FetchDaysWeatherData.Response()
-    presenter?.presentDaysWeatherData(response: response)
+    if let data = self.interimStatements {
+      let response = DayWeatherData.FetchDaysWeatherData.Response(daysWeatherData: data)
+      presenter?.presentDaysWeatherData(response: response)
+    }
+
   }
 }

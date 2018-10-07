@@ -15,17 +15,20 @@ import UIKit
 protocol WeatherForecastsBusinessLogic
 {
   func fetchWeatherForecasts(request: WeatherForecasts.FetchWeatherData.Request)
+  func showWeatherDataOfSelectedDay(request: WeatherForecasts.ShowDetails.Request)
 }
 
 protocol WeatherForecastsDataStore
 {
-
+  var interimStatementsOfSelectedDay: [DailyInterimStatement] { get set }
 }
 
 class WeatherForecastsInteractor: WeatherForecastsBusinessLogic, WeatherForecastsDataStore
 {
   var presenter: WeatherForecastsPresentationLogic?
-  
+  var interimStatementsOfSelectedDay = [DailyInterimStatement]()
+
+  var weatherData = [Date: [DailyInterimStatement]]()
   var worker = WeatherWorker(weatherDataStore: WeatherApi())
 
   // MARK: FetchWeatherData
@@ -33,8 +36,15 @@ class WeatherForecastsInteractor: WeatherForecastsBusinessLogic, WeatherForecast
   func fetchWeatherForecasts(request: WeatherForecasts.FetchWeatherData.Request)
   {
     worker.fetchWeatherForecasts { interimStatementsWithin7Days in
+      self.weatherData = interimStatementsWithin7Days
       let response = WeatherForecasts.FetchWeatherData.Response(interimStatements: interimStatementsWithin7Days)
       self.presenter?.presentWeatherForecasts(response: response)
     }
+  }
+  
+  // MARK: Show Details of the selected day
+  func showWeatherDataOfSelectedDay(request: WeatherForecasts.ShowDetails.Request)
+  {
+    self.interimStatementsOfSelectedDay = weatherData[request.date] ?? []
   }
 }

@@ -23,9 +23,20 @@ enum DayWeatherData
     }
     struct Response
     {
+      let daysWeatherData:  [DailyInterimStatement]
     }
     struct ViewModel
     {
+      struct DisplayedInterimStatement {
+        var time: NSAttributedString
+        var temperature: NSAttributedString
+        var rain: NSAttributedString
+        var moisture: NSAttributedString
+        var averageWind: NSAttributedString
+        var pressure: NSAttributedString
+      }
+      
+      let displayedInterimStatements: [DisplayedInterimStatement]
     }
   }
 }

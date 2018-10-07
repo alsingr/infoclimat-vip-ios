@@ -47,6 +47,9 @@
 		B53573382169605900325EE1 /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53573372169605900325EE1 /* NSAttributedStringExtensions.swift */; };
 		B535733A2169618400325EE1 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53573392169618400325EE1 /* UIColorExtensions.swift */; };
 		B535733C2169F75D00325EE1 /* URLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535733B2169F75D00325EE1 /* URLResponse.swift */; };
+		B535733E216A256800325EE1 /* DayWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535733D216A256800325EE1 /* DayWeatherCell.swift */; };
+		B53A64DF216A27C600E539E9 /* DayWeatherTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A64DE216A27C600E539E9 /* DayWeatherTableView.swift */; };
+		B53A64E1216A2D8800E539E9 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A64E0216A2D8800E539E9 /* NumberExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +95,9 @@
 		B53573372169605900325EE1 /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		B53573392169618400325EE1 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		B535733B2169F75D00325EE1 /* URLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponse.swift; sourceTree = "<group>"; };
+		B535733D216A256800325EE1 /* DayWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherCell.swift; sourceTree = "<group>"; };
+		B53A64DE216A27C600E539E9 /* DayWeatherTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherTableView.swift; sourceTree = "<group>"; };
+		B53A64E0216A2D8800E539E9 /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +217,8 @@
 				B5282FC42168CBE200842522 /* DayWeatherDataModels.swift */,
 				B5282FC52168CBE200842522 /* DayWeatherDataViewController.swift */,
 				B5282FC62168CBE200842522 /* DayWeatherDataInteractor.swift */,
+				B535733D216A256800325EE1 /* DayWeatherCell.swift */,
+				B53A64DE216A27C600E539E9 /* DayWeatherTableView.swift */,
 			);
 			path = DayWeatherData;
 			sourceTree = "<group>";
@@ -317,6 +325,7 @@
 			children = (
 				B5357331216927CE00325EE1 /* StringExtensions.swift */,
 				B53573332169333400325EE1 /* DoubleExtensions.swift */,
+				B53A64E0216A2D8800E539E9 /* NumberExtensions.swift */,
 			);
 			path = StdLib;
 			sourceTree = "<group>";
@@ -404,11 +413,13 @@
 				B5282FCB2168CBE200842522 /* DayWeatherDataViewController.swift in Sources */,
 				B535731F2168E19C00325EE1 /* URLSessionProtocol.swift in Sources */,
 				B5282FBB2168C62000842522 /* WeatherForecastsPresenter.swift in Sources */,
+				B53A64DF216A27C600E539E9 /* DayWeatherTableView.swift in Sources */,
 				B53573172168E19C00325EE1 /* ParametersEncoding.swift in Sources */,
 				B53573342169333400325EE1 /* DoubleExtensions.swift in Sources */,
 				B53573182168E19C00325EE1 /* NetworkResponse.swift in Sources */,
 				B535731C2168E19C00325EE1 /* URLSessionProvider.swift in Sources */,
 				B5282FCC2168CBE200842522 /* DayWeatherDataInteractor.swift in Sources */,
+				B535733E216A256800325EE1 /* DayWeatherCell.swift in Sources */,
 				B5282FC02168C62000842522 /* WeatherForecastsInteractor.swift in Sources */,
 				B53573062168E13B00325EE1 /* URLRequestExtension.swift in Sources */,
 				B5282FCA2168CBE200842522 /* DayWeatherDataModels.swift in Sources */,
@@ -424,6 +435,7 @@
 				B5357332216927CE00325EE1 /* StringExtensions.swift in Sources */,
 				B535731B2168E19C00325EE1 /* NetworkError.swift in Sources */,
 				B5282FBD2168C62000842522 /* WeatherForecastsRouter.swift in Sources */,
+				B53A64E1216A2D8800E539E9 /* NumberExtensions.swift in Sources */,
 				B5282F902168BAC900842522 /* WeatherForecastsTableView.swift in Sources */,
 				B53573262168F25D00325EE1 /* DataExtensions.swift in Sources */,
 				B53573072168E13B00325EE1 /* URLComponentsExtension.swift in Sources */,

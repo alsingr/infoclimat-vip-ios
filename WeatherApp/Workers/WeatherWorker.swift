@@ -33,7 +33,7 @@ class WeatherWorker {
           completionHandler(weatherForecasts)
         }
       } catch {
-        DispatchQueue.main.async {
+          DispatchQueue.main.async {
           completionHandler([:])
         }
       }

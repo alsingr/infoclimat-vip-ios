@@ -254,7 +254,7 @@ extension Date {
 extension Date {
   func applyDateStyle() -> NSMutableAttributedString {
     return  NSMutableAttributedString(string: "\(day) \(monthName())")
-      .font(UIFont.systemFont(ofSize: 16))
+      .font(primaryFont)
       .color(UIColor.black)
   }
     

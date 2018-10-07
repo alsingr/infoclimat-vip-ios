@@ -14,7 +14,7 @@ final class URLSessionProvider: ProviderProtocol {
   private lazy var cachedSession: URLSession = {
     URLCache.shared.memoryCapacity = 512 * 1024 * 1024
     let configuration = URLSessionConfiguration.default
-    configuration.requestCachePolicy = .returnCacheDataDontLoad
+    configuration.requestCachePolicy = .returnCacheDataElseLoad
     return URLSession(configuration: configuration)
   }()
   

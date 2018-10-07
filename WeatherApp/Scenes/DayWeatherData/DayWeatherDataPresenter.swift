@@ -25,7 +25,41 @@ class DayWeatherDataPresenter: DayWeatherDataPresentationLogic
   
   func presentDaysWeatherData(response: DayWeatherData.FetchDaysWeatherData.Response)
   {
-    let viewModel = DayWeatherData.FetchDaysWeatherData.ViewModel()
+    var data = response.daysWeatherData.reduce(into: [DayWeatherData.FetchDaysWeatherData.ViewModel.DisplayedInterimStatement](), { result, value in
+      result.append(DayWeatherData.FetchDaysWeatherData.ViewModel.DisplayedInterimStatement(interimStatement: value))
+    })
+    data.insert(DayWeatherData.FetchDaysWeatherData.ViewModel.DisplayedInterimStatement.header, at: 0)
+    let viewModel = DayWeatherData.FetchDaysWeatherData.ViewModel(displayedInterimStatements: data)
     viewController?.displayDaysWeatherData(viewModel: viewModel)
   }
 }
+
+
+private extension Array where Element == DailyInterimStatement {
+  func summarize() -> NSAttributedString {
+    return NSMutableAttributedString()
+  }
+}
+
+private extension DayWeatherData.FetchDaysWeatherData.ViewModel.DisplayedInterimStatement {
+  
+  init(interimStatement: DailyInterimStatement) {
+    self.temperature = "\(interimStatement.temperature)".applyTemperatureStyle()
+    self.time = "\(interimStatement.time.hour)".applyHourStyle()
+    self.averageWind = "\(interimStatement.averageWind)".applyNumberStyle()
+    self.moisture = "\(interimStatement.moisture)".applyNumberStyle()
+    self.rain = "\(interimStatement.rain)".applyRainStyle()
+    self.pressure = "\(interimStatement.pressure)".applyNumberStyle()
+  }
+  
+  static var header: DayWeatherData.FetchDaysWeatherData.ViewModel.DisplayedInterimStatement {
+    return DayWeatherData.FetchDaysWeatherData.ViewModel.DisplayedInterimStatement (time: "Heure".applyNumberStyle(),
+                                                                                    temperature: "Température".applyNumberStyle(),
+                                                                                    rain: "Pluie".applyNumberStyle(),
+                                                                                    moisture: "Humidité".applyNumberStyle(),
+                                                                                    averageWind: "Vents".applyNumberStyle(),
+                                                                                    pressure: "Pression".applyNumberStyle())
+  }
+  
+}
+

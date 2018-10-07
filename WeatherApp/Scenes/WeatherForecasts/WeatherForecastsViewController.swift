@@ -23,6 +23,8 @@ class WeatherForecastsViewController: UITableViewController, WeatherForecastsDis
   var router: (NSObjectProtocol & WeatherForecastsRoutingLogic & WeatherForecastsDataPassing)?
 
   var weatherData = [WeatherForecasts.FetchWeatherData.ViewModel.DaysWeatherData]()
+  var dateSelected: Date? = nil
+  
   // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -73,9 +75,11 @@ class WeatherForecastsViewController: UITableViewController, WeatherForecastsDis
     fetchWeatherData()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+    super.viewWillAppear(animated)
+  }
   // MARK: FetchWeatherData
-  
-  //@IBOutlet weak var nameTextField: UITextField!
   
   func fetchWeatherData()
   {
@@ -88,4 +92,16 @@ class WeatherForecastsViewController: UITableViewController, WeatherForecastsDis
     weatherData = viewModel.weatherData
     tableView.reloadData()
   }
+  
+  // MARK: FetchWeatherData
+  
+  func showDaysWeatherData()
+  {
+    guard let dateSelected = dateSelected else { return }
+
+    let request = WeatherForecasts.ShowDetails.Request(date: dateSelected)
+    interactor?.showWeatherDataOfSelectedDay(request: request)
+  }
+  
+  
 }

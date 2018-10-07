@@ -22,6 +22,9 @@ class DayWeatherDataViewController: UIViewController, DayWeatherDataDisplayLogic
   var interactor: DayWeatherDataBusinessLogic?
   var router: (NSObjectProtocol & DayWeatherDataRoutingLogic & DayWeatherDataDataPassing)?
 
+  @IBOutlet weak var tableView: UITableView!
+  
+  var displayedInterimStatements =  [DayWeatherData.FetchDaysWeatherData.ViewModel.DisplayedInterimStatement]()
   // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -69,12 +72,17 @@ class DayWeatherDataViewController: UIViewController, DayWeatherDataDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    setupViews()
     fetchDaysWeatherData()
   }
   
-  // MARK: FetchDaysWeatherData
   
-  //@IBOutlet weak var nameTextField: UITextField!
+  func setupViews()
+  {
+    tableView.delegate = self
+    tableView.dataSource = self
+  }
+  // MARK: FetchDaysWeatherData
   
   func fetchDaysWeatherData()
   {
@@ -84,15 +92,12 @@ class DayWeatherDataViewController: UIViewController, DayWeatherDataDisplayLogic
   
   func displayDaysWeatherData(viewModel: DayWeatherData.FetchDaysWeatherData.ViewModel)
   {
-    //nameTextField.text = viewModel.name
+    displayedInterimStatements = viewModel.displayedInterimStatements
+    tableView.reloadData()
   }
   
   func canBeRoutingTo() -> Bool {
     return self.router?.dataStore?.interimStatements == nil
   }
-  var detailItem: NSDate? {
-    didSet {
-      // Update the view.
-    }
-  }
+  
 }

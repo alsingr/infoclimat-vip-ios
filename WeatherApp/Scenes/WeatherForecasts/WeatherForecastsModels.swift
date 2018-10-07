@@ -38,4 +38,20 @@ enum WeatherForecasts
       let weatherData: [DaysWeatherData]
     }
   }
+  
+  enum ShowDetails
+  {
+    struct Request
+    {
+      let date: Date
+    }
+    
+    struct Response
+    {
+    }
+    
+    struct ViewModel
+    {
+    }
+  }
 }

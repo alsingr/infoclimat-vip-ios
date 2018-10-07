@@ -14,7 +14,7 @@ import UIKit
 
 @objc protocol WeatherForecastsRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+  func routeToDetail(segue: UIStoryboardSegue?)
 }
 
 protocol WeatherForecastsDataPassing
@@ -30,21 +30,27 @@ class WeatherForecastsRouter: NSObject, WeatherForecastsRoutingLogic, WeatherFor
 
   // MARK: Routing
   
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+  func routeToDetail(segue: UIStoryboardSegue?)
+  {
+    beginByHandlingSelectionEvent()
+    if let segue = segue {
+      let destinationVC = (segue.destination as! UINavigationController).topViewController as! DayWeatherDataViewController
+      
+      var destinationDS = destinationVC.router!.dataStore!
+      passDataToDetail(source: dataStore!, destination: &destinationDS)
+    } else {
+      // Using Storyboard
+    }
+  }
 
+  private func     beginByHandlingSelectionEvent() {
+    if let indexPath = viewController?.tableView.indexPathForSelectedRow,
+      let dateSelected = viewController?.weatherData[indexPath.row].date {
+      viewController?.dateSelected = dateSelected
+      viewController?.showDaysWeatherData()
+    }
+  }
+  
   // MARK: Navigation
   
   //func navigateToSomewhere(source: WeatherForecastsViewController, destination: SomewhereViewController)
@@ -54,8 +60,9 @@ class WeatherForecastsRouter: NSObject, WeatherForecastsRoutingLogic, WeatherFor
   
   // MARK: Passing data
   
-  //func passDataToSomewhere(source: WeatherForecastsDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+  func passDataToDetail(source: WeatherForecastsDataStore, destination: inout DayWeatherDataDataStore)
+  {
+    let arrayOfData = source.interimStatementsOfSelectedDay
+    destination.interimStatements = arrayOfData.isEmpty ? nil : arrayOfData
+  }
 }
