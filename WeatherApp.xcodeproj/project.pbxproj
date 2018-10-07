@@ -50,6 +50,10 @@
 		B535733E216A256800325EE1 /* DayWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535733D216A256800325EE1 /* DayWeatherCell.swift */; };
 		B53A64DF216A27C600E539E9 /* DayWeatherTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A64DE216A27C600E539E9 /* DayWeatherTableView.swift */; };
 		B53A64E1216A2D8800E539E9 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A64E0216A2D8800E539E9 /* NumberExtensions.swift */; };
+		B53A64E5216A701C00E539E9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A64E4216A701C00E539E9 /* Alert.swift */; };
+		B53A64E7216A72B700E539E9 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A64E6216A72B700E539E9 /* AppUtils.swift */; };
+		B53A64E9216A77EF00E539E9 /* ErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A64E8216A77EF00E539E9 /* ErrorStrings.swift */; };
+		B53A64EB216A78C600E539E9 /* LoadingActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A64EA216A78C600E539E9 /* LoadingActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +102,10 @@
 		B535733D216A256800325EE1 /* DayWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherCell.swift; sourceTree = "<group>"; };
 		B53A64DE216A27C600E539E9 /* DayWeatherTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherTableView.swift; sourceTree = "<group>"; };
 		B53A64E0216A2D8800E539E9 /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
+		B53A64E4216A701C00E539E9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		B53A64E6216A72B700E539E9 /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
+		B53A64E8216A77EF00E539E9 /* ErrorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStrings.swift; sourceTree = "<group>"; };
+		B53A64EA216A78C600E539E9 /* LoadingActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingActivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				B53573032168E11400325EE1 /* Extensions */,
+				B53A64E3216A700200E539E9 /* Shared */,
 				B5282FA62168BE9D00842522 /* Services */,
 				B53573272169104000325EE1 /* Workers */,
 				B5282FA52168BE5400842522 /* Models */,
@@ -330,6 +339,17 @@
 			path = StdLib;
 			sourceTree = "<group>";
 		};
+		B53A64E3216A700200E539E9 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B53A64E4216A701C00E539E9 /* Alert.swift */,
+				B53A64E6216A72B700E539E9 /* AppUtils.swift */,
+				B53A64E8216A77EF00E539E9 /* ErrorStrings.swift */,
+				B53A64EA216A78C600E539E9 /* LoadingActivity.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -419,6 +439,7 @@
 				B53573182168E19C00325EE1 /* NetworkResponse.swift in Sources */,
 				B535731C2168E19C00325EE1 /* URLSessionProvider.swift in Sources */,
 				B5282FCC2168CBE200842522 /* DayWeatherDataInteractor.swift in Sources */,
+				B53A64E9216A77EF00E539E9 /* ErrorStrings.swift in Sources */,
 				B535733E216A256800325EE1 /* DayWeatherCell.swift in Sources */,
 				B5282FC02168C62000842522 /* WeatherForecastsInteractor.swift in Sources */,
 				B53573062168E13B00325EE1 /* URLRequestExtension.swift in Sources */,
@@ -426,6 +447,7 @@
 				B5282FC82168CBE200842522 /* DayWeatherDataWorker.swift in Sources */,
 				B535731A2168E19C00325EE1 /* Task.swift in Sources */,
 				B535732D2169195100325EE1 /* WeatherApi.swift in Sources */,
+				B53A64E5216A701C00E539E9 /* Alert.swift in Sources */,
 				B53573292169109F00325EE1 /* WeatherWorker.swift in Sources */,
 				B5282FC92168CBE200842522 /* DayWeatherDataRouter.swift in Sources */,
 				B53573232168E32400325EE1 /* WeatherForecastsService.swift in Sources */,
@@ -433,10 +455,12 @@
 				B5282FBE2168C62000842522 /* WeatherForecastsModels.swift in Sources */,
 				B535733621695D5200325EE1 /* WeatherForecastsCell.swift in Sources */,
 				B5357332216927CE00325EE1 /* StringExtensions.swift in Sources */,
+				B53A64E7216A72B700E539E9 /* AppUtils.swift in Sources */,
 				B535731B2168E19C00325EE1 /* NetworkError.swift in Sources */,
 				B5282FBD2168C62000842522 /* WeatherForecastsRouter.swift in Sources */,
 				B53A64E1216A2D8800E539E9 /* NumberExtensions.swift in Sources */,
 				B5282F902168BAC900842522 /* WeatherForecastsTableView.swift in Sources */,
+				B53A64EB216A78C600E539E9 /* LoadingActivity.swift in Sources */,
 				B53573262168F25D00325EE1 /* DataExtensions.swift in Sources */,
 				B53573072168E13B00325EE1 /* URLComponentsExtension.swift in Sources */,
 				B5282F8E2168BAC900842522 /* AppDelegate.swift in Sources */,

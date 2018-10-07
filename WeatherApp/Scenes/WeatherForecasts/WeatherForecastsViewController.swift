@@ -17,7 +17,7 @@ protocol WeatherForecastsDisplayLogic: class
   func displayWeatherForecasts(viewModel: WeatherForecasts.FetchWeatherData.ViewModel)
 }
 
-class WeatherForecastsViewController: UITableViewController, WeatherForecastsDisplayLogic
+class WeatherForecastsViewController: UITableViewController, WeatherForecastsDisplayLogic, Alertable
 {
   var interactor: WeatherForecastsBusinessLogic?
   var router: (NSObjectProtocol & WeatherForecastsRoutingLogic & WeatherForecastsDataPassing)?
@@ -83,13 +83,20 @@ class WeatherForecastsViewController: UITableViewController, WeatherForecastsDis
   
   func fetchWeatherData()
   {
+    LoadingActivity.shared.startAnimating()
     let request = WeatherForecasts.FetchWeatherData.Request()
     interactor?.fetchWeatherForecasts(request: request)
   }
   
   func displayWeatherForecasts(viewModel: WeatherForecasts.FetchWeatherData.ViewModel)
   {
+    LoadingActivity.shared.stopAnimating()
     weatherData = viewModel.weatherData
+    guard weatherData.isEmpty == false
+    else {
+      self.prompt(error: String.cannotDoSomeThing)
+      return
+    }
     tableView.reloadData()
   }
   
