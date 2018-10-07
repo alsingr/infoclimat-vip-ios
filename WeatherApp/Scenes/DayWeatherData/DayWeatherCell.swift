@@ -25,12 +25,12 @@ class DayWeatherCell: UITableViewCell {
   
   private func updateUI()
   {
-    timeL.attributedText = daysWeatherDetailsData?.time
-    temperatureL.attributedText = daysWeatherDetailsData?.temperature
-    rainL.attributedText = daysWeatherDetailsData?.rain
-    moistureL.attributedText = daysWeatherDetailsData?.moisture
-    averageWindL.attributedText = daysWeatherDetailsData?.averageWind
-    pressureL.attributedText = daysWeatherDetailsData?.pressure
+    timeL.attributedText = Formatter.formatToStyle2(daysWeatherDetailsData?.time ?? "")
+    temperatureL.attributedText = Formatter.formatToStyle2(daysWeatherDetailsData?.temperature ?? "")
+    rainL.attributedText = Formatter.formatToStyle2(daysWeatherDetailsData?.rain ?? "")
+    moistureL.attributedText = Formatter.formatToStyle2(daysWeatherDetailsData?.moisture ?? "")
+    averageWindL.attributedText = Formatter.formatToStyle2(daysWeatherDetailsData?.averageWind ?? "")
+    pressureL.attributedText = Formatter.formatToStyle2(daysWeatherDetailsData?.pressure ?? "")
   }
   
 }

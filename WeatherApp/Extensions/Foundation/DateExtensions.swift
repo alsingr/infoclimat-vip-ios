@@ -207,10 +207,10 @@ extension Date {
 extension Date {
   /// Create date object from string. (Thanks to Swifter)
 
-  public init?(dateString: String, format: String = "yyyy-MM-dd HH:mm:ss") {
+  public init?(dateString: String, timeZone: TimeZone? = TimeZone.current, format: String = "yyyy-MM-dd HH:mm:ss") {
     let dateFormatter = DateFormatter()
 //    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+    dateFormatter.timeZone = timeZone
     dateFormatter.dateFormat = format
     if let date = dateFormatter.date(from: dateString) {
       self = date
@@ -221,7 +221,7 @@ extension Date {
   
   public init?(
     calendar: Calendar? = Calendar.current,
-    timeZone: TimeZone? = TimeZone(abbreviation: "UTC"), //TimeZone.current,
+    timeZone: TimeZone? = TimeZone.current,
     era: Int? = Date().era,
     year: Int? = Date().year,
     month: Int? = Date().month,

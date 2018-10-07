@@ -25,18 +25,34 @@ enum DayWeatherData
     {
       let daysWeatherData:  [DailyInterimStatement]
     }
+    
     struct ViewModel
     {
       struct DisplayedInterimStatement {
-        var time: NSAttributedString
-        var temperature: NSAttributedString
-        var rain: NSAttributedString
-        var moisture: NSAttributedString
-        var averageWind: NSAttributedString
-        var pressure: NSAttributedString
+        var time: String = "Heure"
+        var temperature: String = "Température"
+        var rain: String = "Pluie"
+        var moisture: String = "Humidité"
+        var averageWind: String = "Vent"
+        var pressure: String = "Pression"
       }
       
       let displayedInterimStatements: [DisplayedInterimStatement]
     }
+    
   }
 }
+
+typealias DisplayedInterimStatement = DayWeatherData.FetchDaysWeatherData.ViewModel.DisplayedInterimStatement
+ extension DisplayedInterimStatement {
+  
+  init(interimStatement: DailyInterimStatement) {
+    self.temperature = "\(interimStatement.temperatureInDegreeCelsius)°c"
+    self.time = "\(interimStatement.time.hour)h"
+    self.averageWind = "\(interimStatement.averageWind) km/h"
+    self.moisture = "\(interimStatement.moisture)%"
+    self.rain = "\(interimStatement.rain) mm/1h"
+    self.pressure = "\(interimStatement.pressure) hPa"
+  }
+}
+

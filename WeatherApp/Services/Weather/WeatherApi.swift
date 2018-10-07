@@ -45,7 +45,7 @@ class WeatherApi: WeatherStoreProtocol {
       
       let dailyStatement = try mapDailyStatementModel(in:apiResponseForCurrentKey, withKey: dateKey)
       
-      let dateKeyWithoutHoursAndMinutes = Date(year: dateKey.year, month: dateKey.month, day: dateKey.day, hour: 0, minute: 0, second: 0)!
+      let dateKeyWithoutHoursAndMinutes = Date(timeZone: nil, year: dateKey.year, month: dateKey.month, day: dateKey.day, hour: 0, minute: 0, second: 0)!
       
       var orderedArray = result[dateKeyWithoutHoursAndMinutes]
       if orderedArray != nil {
@@ -67,11 +67,11 @@ class WeatherApi: WeatherStoreProtocol {
       let averageWind = dailyDataSingleValue["vent_moyen"]?["10m"] as? Double,
       let moisture = dailyDataSingleValue["humidite"]?["2m"] as? Double,
       let pressure = dailyDataSingleValue["pression"]?["niveau_de_la_mer"] as? Int
-      else { throw NetworkError.noJSONData }
+    else { throw NetworkError.noJSONData }
     
     return DailyInterimStatement(
       time: dateKey,
-      temperature: (temperature - 273.15).int,
+      temperature: temperature,
       rain: rain,
       moisture: moisture,
       averageWind: averageWind,

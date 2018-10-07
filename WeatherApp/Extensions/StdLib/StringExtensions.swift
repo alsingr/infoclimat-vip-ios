@@ -19,39 +19,25 @@ extension String {
       .font(secondaryFont)
       .color(UIColor.black)
   }
-  
-  func applyRainStyle() -> NSAttributedString {
-    return  NSMutableAttributedString(string: "\(self) mm/1h")
-      .font(secondaryFont)
-      .color(UIColor.black)
-  }
-  
-  func applyWindStyle() -> NSAttributedString {
-    return  NSMutableAttributedString(string: "\(self) km/h")
-      .font(secondaryFont)
-      .color(UIColor.black)
-  }
-  
-  func applyPressureStyle() -> NSAttributedString {
-    return  NSMutableAttributedString(string: "\(self) hPa")
-      .font(secondaryFont)
-      .color(UIColor.black)
-  }
-  
-  func applyHourStyle() -> NSAttributedString {
-    return  NSMutableAttributedString(string: "\(self)h")
-      .font(secondaryFont)
-      .color(UIColor.black)
-  }
-  
-  func applyNumberStyle() -> NSAttributedString {
-    return  NSMutableAttributedString(string: "\(self)")
-      .font(secondaryFont)
-      .color(UIColor.black)
-  }
 }
 extension String {
   var toDate: Date? {
-    return Date(dateString: self)
+    return Date(dateString: self, timeZone: nil)
+  }
+}
+
+extension Formatter {
+  static func formatToStyle1(_ text: String) -> NSAttributedString
+  {
+    return NSMutableAttributedString(string: text)
+      .font(primaryFont)
+      .color(UIColor.black)
+  }
+  
+  static func formatToStyle2(_ text: String) -> NSAttributedString
+  {
+    return NSMutableAttributedString(string: text)
+      .font(secondaryFont)
+      .color(UIColor.black)
   }
 }

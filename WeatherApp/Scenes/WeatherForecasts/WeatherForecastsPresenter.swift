@@ -35,25 +35,9 @@ extension WeatherForecastsPresenter {
   private func transformToDisplayedWeatherData(statements: [Date: [DailyInterimStatement]]) -> [WeatherForecasts.FetchWeatherData.ViewModel.DaysWeatherData] {
     
     return statements.map({
-      let minMax = WeatherForecastsPresenter.minMaxTemperature(array: $0.value)
+      let minMax = $0.value.minMaxTemperature()
       return WeatherForecasts.FetchWeatherData.ViewModel.DaysWeatherData(date: $0.key, minTemperature: minMax?.min ?? 0, maxTemperature: minMax?.max ?? 0)
     }).sorted(by: { v1, v2 in v1.date < v2.date })
   }
-  
-  static func minMaxTemperature(array: [DailyInterimStatement]) -> (min: Int, max: Int)? {
-    if array.isEmpty { return nil }
-    var currentMin = array[0].temperature
-    var currentMax = array[0].temperature
-    
-    for value in array[1..<array.count] {
-      if value.temperature < currentMin {
-        currentMin = value.temperature
-      } else if value.temperature > currentMax {
-        currentMax = value.temperature
-      }
-    }
-    return (currentMin, currentMax)
-  }
-  
 }
 
