@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct DailyInterimStatement {
+struct DailyInterimStatement: Equatable, Hashable {
   var time: Date
   var temperature: Int
   var rain: Double

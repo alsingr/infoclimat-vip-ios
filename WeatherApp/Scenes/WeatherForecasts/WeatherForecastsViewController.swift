@@ -22,6 +22,7 @@ class WeatherForecastsViewController: UITableViewController, WeatherForecastsDis
   var interactor: WeatherForecastsBusinessLogic?
   var router: (NSObjectProtocol & WeatherForecastsRoutingLogic & WeatherForecastsDataPassing)?
 
+  var weatherData = [WeatherForecasts.FetchWeatherData.ViewModel.DaysWeatherData]()
   // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -69,10 +70,6 @@ class WeatherForecastsViewController: UITableViewController, WeatherForecastsDis
   override func viewDidLoad()
   {
     super.viewDidLoad()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
     fetchWeatherData()
   }
   
@@ -88,6 +85,7 @@ class WeatherForecastsViewController: UITableViewController, WeatherForecastsDis
   
   func displayWeatherForecasts(viewModel: WeatherForecasts.FetchWeatherData.ViewModel)
   {
-    //nameTextField.text = viewModel.name
+    weatherData = viewModel.weatherData
+    tableView.reloadData()
   }
 }

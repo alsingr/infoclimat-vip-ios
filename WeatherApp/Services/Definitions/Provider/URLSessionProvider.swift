@@ -12,15 +12,13 @@ final class URLSessionProvider: ProviderProtocol {
   
   private var session: URLSessionProtocol
   private lazy var cachedSession: URLSession = {
-    
     URLCache.shared.memoryCapacity = 512 * 1024 * 1024
     let configuration = URLSessionConfiguration.default
-    configuration.requestCachePolicy = .returnCacheDataElseLoad
-  
+    configuration.requestCachePolicy = .returnCacheDataDontLoad
     return URLSession(configuration: configuration)
   }()
-
-  init(usingCache: Bool = false, session: URLSessionProtocol = URLSession.shared) {
+  
+  init(usingCache: Bool = false, session: URLSessionProtocol = URLSession.shared, sessionDelegate: URLSessionDataDelegate = ProviderSessionDelegate()) {
     self.session = session
     if usingCache {
       self.session = cachedSession
@@ -48,7 +46,7 @@ final class URLSessionProvider: ProviderProtocol {
   }
   
   private func handleDataResponse<T: Decodable>(data: Data?, response: HTTPURLResponse?, error: Error?, completion: (NetworkResponse<T>) -> ()) {
-
+    
     guard error == nil else { return completion(.failure(.unknown)) }
     guard let response = response else { return completion(.failure(.noJSONData)) }
     
@@ -67,10 +65,30 @@ final class URLSessionProvider: ProviderProtocol {
     switch response.statusCode {
     case 200...299:
       guard let data = data, let model = data.mapJSON()
- else { return completion(.failure(.unknown)) }
+        else { return completion(.failure(.unknown)) }
       completion(.success(model))
     default:
       completion(.failure(.unknown))
     }
   }
+  
+  
 }
+
+class ProviderSessionDelegate: NSObject, URLSessionDataDelegate {
+  func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
+    if dataTask.currentRequest?.cachePolicy == .useProtocolCachePolicy {
+      let newResponse = proposedResponse.response(withExpirationDuration: 300)
+      completionHandler(newResponse)
+    }else {
+      completionHandler(proposedResponse)
+    }
+  }
+  
+  func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
+    completionHandler(.allow)
+  }
+
+}
+
+

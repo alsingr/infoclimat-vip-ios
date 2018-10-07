@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alvyn SILOU. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Date {
   
@@ -127,6 +127,79 @@ extension Date {
       }
     }
   }
+  
+  /// SwifterSwift: Day name format.
+  ///
+  /// - threeLetters: 3 letter day abbreviation of day name.
+  /// - oneLetter: 1 letter day abbreviation of day name.
+  /// - full: Full day name.
+  public enum DayNameStyle {
+    case threeLetters
+    case oneLetter
+    case full
+  }
+  
+  /// SwifterSwift: Month name format.
+  ///
+  /// - threeLetters: 3 letter month abbreviation of month name.
+  /// - oneLetter: 1 letter month abbreviation of month name.
+  /// - full: Full month name.
+  public enum MonthNameStyle {
+    case threeLetters
+    case oneLetter
+    case full
+  }
+  
+  /// SwifterSwift: Day name from date.
+  ///
+  ///   Date().dayName(ofStyle: .oneLetter) -> "T"
+  ///   Date().dayName(ofStyle: .threeLetters) -> "Thu"
+  ///   Date().dayName(ofStyle: .full) -> "Thursday"
+  ///
+  /// - Parameter Style: style of day name (default is DayNameStyle.full).
+  /// - Returns: day name string (example: W, Wed, Wednesday).
+  public func dayName(ofStyle style: DayNameStyle = .full) -> String {
+    // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
+    let dateFormatter = DateFormatter()
+    var format: String {
+      switch style {
+      case .oneLetter:
+        return "EEEEE"
+      case .threeLetters:
+        return "EEE"
+      case .full:
+        return "EEEE"
+      }
+    }
+    dateFormatter.setLocalizedDateFormatFromTemplate(format)
+    return dateFormatter.string(from: self)
+  }
+  
+  /// SwifterSwift: Month name from date.
+  ///
+  ///   Date().monthName(ofStyle: .oneLetter) -> "J"
+  ///   Date().monthName(ofStyle: .threeLetters) -> "Jan"
+  ///   Date().monthName(ofStyle: .full) -> "January"
+  ///
+  /// - Parameter Style: style of month name (default is MonthNameStyle.full).
+  /// - Returns: month name string (example: D, Dec, December).
+  public func monthName(ofStyle style: MonthNameStyle = .full) -> String {
+    // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
+    let dateFormatter = DateFormatter()
+    var format: String {
+      switch style {
+      case .oneLetter:
+        return "MMMMM"
+      case .threeLetters:
+        return "MMM"
+      case .full:
+        return "MMMM"
+      }
+    }
+    dateFormatter.setLocalizedDateFormatFromTemplate(format)
+    return dateFormatter.string(from: self)
+  }
+
 
 }
 // MARK: - Initializers
@@ -174,4 +247,15 @@ extension Date {
       return nil
     }
   }
+}
+
+
+// MARK: - Styling
+extension Date {
+  func applyDateStyle() -> NSMutableAttributedString {
+    return  NSMutableAttributedString(string: "\(day) \(monthName())")
+      .font(UIFont.systemFont(ofSize: 16))
+      .color(UIColor.black)
+  }
+    
 }

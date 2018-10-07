@@ -47,8 +47,11 @@ class WeatherApi: WeatherStoreProtocol {
       
       let dateKeyWithoutHoursAndMinutes = Date(year: dateKey.year, month: dateKey.month, day: dateKey.day, hour: 0, minute: 0, second: 0)!
       
-      if result[dateKeyWithoutHoursAndMinutes] != nil {
-        result[dateKeyWithoutHoursAndMinutes]!.append(dailyStatement)
+      var orderedArray = result[dateKeyWithoutHoursAndMinutes]
+      if orderedArray != nil {
+        orderedArray!.append(dailyStatement)
+        orderedArray = orderedArray!.sorted(by: { value1, value2 in return value1.time < value2.time })
+         result[dateKeyWithoutHoursAndMinutes] = orderedArray
       } else {
         result[dateKeyWithoutHoursAndMinutes] = [dailyStatement]
       }

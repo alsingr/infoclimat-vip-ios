@@ -21,12 +21,21 @@ enum WeatherForecasts
     struct Request
     {
     }
+    
     struct Response
     {
       var interimStatements: [Date: [DailyInterimStatement]]
     }
+    
     struct ViewModel
     {
+      struct DaysWeatherData {
+        let date: Date
+        let minTemperature: Int
+        let maxTemperature: Int
+      }
+      
+      let weatherData: [DaysWeatherData]
     }
   }
 }

@@ -17,12 +17,12 @@ extension WeatherForecastsViewController {
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2
+    return weatherData.count
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-    cell.textLabel!.text = "object.description"
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! WeatherForecastsCell
+    cell.daysWeatherData = weatherData[indexPath.row]
     return cell
   }
 

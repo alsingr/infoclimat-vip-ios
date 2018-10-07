@@ -24,7 +24,7 @@ class WeatherWorker {
     self.weatherDataStore = weatherDataStore
   }
   
-  func fetchWeatherForecasts(location: CLLocation = Defaults.location, completionHandler: @escaping ([Date : [DailyInterimStatement]]) -> Void)
+  func fetchWeatherForecasts(location: CLLocation = WeatherWorker.Defaults.location, completionHandler: @escaping ([Date : [DailyInterimStatement]]) -> Void)
   {
     weatherDataStore.fetchForecasts(location: location) { (weatherData: () throws -> [Date : [DailyInterimStatement]]) -> Void in
       do {
@@ -40,6 +40,7 @@ class WeatherWorker {
     }
   }
 }
+
 
 // MARK: - Weather store API
 protocol WeatherStoreProtocol
