@@ -36,7 +36,6 @@ class WeatherForecastsInteractor: WeatherForecastsBusinessLogic, WeatherForecast
   func fetchWeatherForecasts(request: WeatherForecasts.FetchWeatherData.Request)
   {
     worker.fetchWeatherForecasts { interimStatementsWithin7Days in
-      print("\(interimStatementsWithin7Days)")
       self.weatherData = interimStatementsWithin7Days
       let response = WeatherForecasts.FetchWeatherData.Response(interimStatements: interimStatementsWithin7Days)
       self.presenter?.presentWeatherForecasts(response: response)
